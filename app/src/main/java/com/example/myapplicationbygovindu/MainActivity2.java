@@ -56,7 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 else{
                     phone_email.getText().clear();
-                    phone_email.setHint("Enter a valid phone number or email address");
+                    phone_email.setHint("Enter a valid phone number or an email address");
                 }
 
             }
