@@ -15,7 +15,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
@@ -59,29 +58,14 @@ public class MainActivityTest extends TestCase {
             // c) The user provided voice input should be correctly entered in the text field.
 
             String voiceText = Espresso.onView(withId(R.id.voice)).perform(click()).toString();
-            if(voiceText.equalsIgnoreCase(message)){
-                Espresso.onView(withId(R.id.editText)).perform(typeText(voiceText));
-                Espresso.onView(withId(R.id.main)).check(matches(isDisplayed()));
-            }
-
+            Espresso.onView(withId(R.id.editText)).perform(typeText(voiceText));
+            Espresso.onView(withId(R.id.main)).check(matches(isDisplayed()));
 
     }
 
-    @Test
-    public void userTest(){
-        Espresso.onView(withId(R.id.editText)).perform(typeText(str));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.confirm)).perform(click());
-        Espresso.onView(withId(R.id.p_e)).perform(typeText("23451"));
-        Espresso.onView(withId(R.id.confirm)).check(matches(withHint("Enter a valid phone number or an email address")));
-
-        Espresso.onView(withId(R.id.p_e)).perform(typeText("abcd@gmail"));
-        Espresso.onView(withId(R.id.confirm)).check(matches(withHint("Enter a valid phone number or an email address")));
-bc397680e1a942e5367efb55daffd0879a42fa8f
 
     }
 
 
 
 
-}
