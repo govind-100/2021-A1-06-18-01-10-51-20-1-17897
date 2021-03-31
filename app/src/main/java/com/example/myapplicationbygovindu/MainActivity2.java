@@ -31,10 +31,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 if(phone_email.getText().toString().length() == 0)
                 {
-                  //  phone_email.setError("This field should not be empty");
-                    phone_email.setHint("\"This field should not be empty\"");
+                    phone_email.setHint("This field should not be empty");
                 }
-                else if(isValidMail(phone_email.getText().toString().trim())){
+                else if(isValidMail(phone_email.getText().toString())){
 
                     String[] toMail =  phone_email.getText().toString().trim().split(" ");
                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
@@ -46,21 +45,17 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Sending Email...", Toast.LENGTH_SHORT).show();
 
                 }
-                else if(isValidPhone(phone_email.getText().toString().trim())){
+                else if(isValidPhone(phone_email.getText().toString())){
                     Intent phoneIntent= new Intent(Intent.ACTION_VIEW);
                     phoneIntent.setData(Uri.parse(String.format("smsto: %s", phone_email.getText().toString().trim())));
-                    //    phoneIntent.putExtra(Intent.EXTRA_PHONE_NUMBER, phone_email.getText().toString().trim());
-                    //   phoneIntent.putExtra(Intent.EXTRA_TEXT, getMessage);
-
                     phoneIntent.putExtra("sms_body", getMessage);
 
                     startActivity(Intent.createChooser(phoneIntent,"choose one application"));
                     Toast.makeText(getApplicationContext(),"Sending SMS...", Toast.LENGTH_SHORT).show();
 
                 }
-
                 else{
-                   // phone_email.setError("Enter a valid phone number or email address");
+                    phone_email.getText().clear();
                     phone_email.setHint("Enter a valid phone number or email address");
                 }
 
@@ -72,6 +67,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private boolean isValidMail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
     }
 
     private boolean isValidPhone(String phone){
